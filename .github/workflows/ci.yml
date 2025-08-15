@@ -11,15 +11,22 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      DOTNET_ROOT: /usr/share/dotnet
+
     steps:
     - uses: actions/checkout@v4
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+
     - name: Restore the packages
-      run: dotnet restore
+      run: dotnet restore Foody_Ivaylo/Foody_Ivaylo.sln
+
     - name: Build the solution
-      run: dotnet build --no-restore
+      run: dotnet build Foody_Ivaylo/Foody_Ivaylo.sln --no-restore
+
     - name: Run all tests
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test Foody_Ivaylo/Foody_Ivaylo.sln --no-build --verbosity normal
